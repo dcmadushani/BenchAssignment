@@ -124,10 +124,15 @@ namespace OnlineStore.WebAPI.Controllers
             return new string[] { "Value1", "Value2", "Value3" };
         }
 
+        /// <summary>
+        /// Get customer details by customer email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpGet("GetCustomer")]
-        public CustomerDto GetCustomerByID(string email)
+        public CustomerDto GetCustomerByEmail(string email)
          {
-            var customerData = customerManagement.GetCustomerByID(email);
+            var customerData = customerManagement.GetCustomerByEmail(email);
             CustomerDto result = customerData != null ? _mapper.Map<CustomerDto>(customerData) : null;
             return result;
             //return customerManagement.GetCustomerByID(email);

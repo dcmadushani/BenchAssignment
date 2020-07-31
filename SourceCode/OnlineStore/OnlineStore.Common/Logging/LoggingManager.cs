@@ -9,6 +9,10 @@ namespace OnlineStore.Common.Logging
     {
         private Logger log = LogManager.GetCurrentClassLogger();
 
+        /// <summary>
+        /// Method to log errors
+        /// </summary>
+        /// <param name="message"></param>
         public void Error(string message)
         {
             StringBuilder formattedMessage = new StringBuilder();
@@ -19,6 +23,10 @@ namespace OnlineStore.Common.Logging
             formattedMessage.Clear();
         }
 
+        /// <summary>
+        /// Method to log information
+        /// </summary>
+        /// <param name="message"></param>
         public void Info(string message)
         {
             StringBuilder formattedMessage = new StringBuilder();

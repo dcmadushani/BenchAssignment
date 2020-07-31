@@ -9,6 +9,9 @@ namespace OnlineStore.Common
 {
     public class ModelMappingProfile : Profile
     {
+        /// <summary>
+        /// use to create model mapping profile with AutoMApper
+        /// </summary>
         public ModelMappingProfile() 
         {
             CreateMap<Customer, CustomerDto>();

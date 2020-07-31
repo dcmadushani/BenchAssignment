@@ -23,6 +23,9 @@ namespace OnlineStore.Business
 
         }
 
+        /// <summary>
+        /// Create object from customer repository
+        /// </summary>
         public ICustomerRepository CustomerRepository
         {
             get
@@ -35,13 +38,18 @@ namespace OnlineStore.Business
             }
         }
 
-        public Customer GetCustomerByID(string email)
+        /// <summary>
+        /// Get customer details by customer email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public Customer GetCustomerByEmail(string email)
         {
             Customer customerData = new Customer();
             try
             {
-                customerData = CustomerRepository.GetCustomerByID(email);
-                CustomerDto resut = customerData != null ? _mapper.Map<CustomerDto>(customerData) : null;
+                customerData = CustomerRepository.GetCustomerByEmail(email);
+                //CustomerDto resut = customerData != null ? _mapper.Map<CustomerDto>(customerData) : null;
                 //return resut;
                 //return customerData;
             }
