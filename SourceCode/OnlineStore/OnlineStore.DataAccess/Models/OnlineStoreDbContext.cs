@@ -3,7 +3,6 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
 
 namespace OnlineStore.DataAccess.Models
 {
@@ -26,7 +25,7 @@ namespace OnlineStore.DataAccess.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json",optional:true,reloadOnChange:true);
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             string connString = builder.Build().GetSection("ConnectionString").GetSection("OnlineStoreConnection").Value;
             if (!optionsBuilder.IsConfigured)
             {
@@ -94,6 +93,12 @@ namespace OnlineStore.DataAccess.Models
                 entity.Property(e => e.Status)
                     .HasMaxLength(20)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Customer)
+                    .WithMany(p => p.Order)
+                    .HasForeignKey(d => d.CustomerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Order_Customer");
             });
 
             modelBuilder.Entity<OrderProduct>(entity =>
@@ -103,6 +108,18 @@ namespace OnlineStore.DataAccess.Models
                 entity.Property(e => e.Status)
                     .HasMaxLength(20)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.OrderProduct)
+                    .HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrderProduct_Order");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.OrderProduct)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrderProduct_Product");
             });
 
             modelBuilder.Entity<Product>(entity =>

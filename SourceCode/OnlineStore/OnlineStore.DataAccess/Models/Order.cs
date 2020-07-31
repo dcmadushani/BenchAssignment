@@ -5,6 +5,11 @@ namespace OnlineStore.DataAccess.Models
 {
     public partial class Order
     {
+        public Order()
+        {
+            OrderProduct = new HashSet<OrderProduct>();
+        }
+
         public long OrderId { get; set; }
         public double? Amount { get; set; }
         public DateTime? CreatedDate { get; set; }
@@ -13,5 +18,8 @@ namespace OnlineStore.DataAccess.Models
         public string Status { get; set; }
         public string OrderNote { get; set; }
         public long CustomerId { get; set; }
+
+        public virtual Customer Customer { get; set; }
+        public virtual ICollection<OrderProduct> OrderProduct { get; set; }
     }
 }

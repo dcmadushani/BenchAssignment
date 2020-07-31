@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineStore.Common\OnlineStore.Common.csproj" />
+    <ProjectReference Include="..\OnlineStore.DataAccess\OnlineStore.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

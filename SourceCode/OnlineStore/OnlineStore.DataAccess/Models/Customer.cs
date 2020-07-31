@@ -8,6 +8,7 @@ namespace OnlineStore.DataAccess.Models
         public Customer()
         {
             Address = new HashSet<Address>();
+            Order = new HashSet<Order>();
         }
 
         public long CustomerId { get; set; }
@@ -20,5 +21,6 @@ namespace OnlineStore.DataAccess.Models
         public DateTime? RegistedDate { get; set; }
 
         public virtual ICollection<Address> Address { get; set; }
+        public virtual ICollection<Order> Order { get; set; }
     }
 }

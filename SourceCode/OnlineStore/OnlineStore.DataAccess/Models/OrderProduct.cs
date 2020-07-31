@@ -10,5 +10,8 @@ namespace OnlineStore.DataAccess.Models
         public int? NoOfUnits { get; set; }
         public double? UnitPrice { get; set; }
         public string Status { get; set; }
+
+        public virtual Order Order { get; set; }
+        public virtual Product Product { get; set; }
     }
 }
